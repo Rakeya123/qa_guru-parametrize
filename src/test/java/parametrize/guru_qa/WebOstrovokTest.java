@@ -11,8 +11,6 @@ import parametrize.pageobjects.ChoiceLanguage;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static com.codeborne.selenide.CollectionCondition.texts;
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 public class WebOstrovokTest {
@@ -27,7 +25,7 @@ public class WebOstrovokTest {
 
 
     @EnumSource(LanguageOstrovok.class)
-    @ParameterizedTest(name = "Правильный выбор языка")
+    @ParameterizedTest(name = "Правильное оттображение выбранного языка")
     void сorrectTextDisplay(LanguageOstrovok language) {
 
         choiceLanguage.languageTabOpen();
@@ -41,7 +39,7 @@ public class WebOstrovokTest {
             "English,Search"
     })
 
-    @ParameterizedTest(name = "Для выбора страны {0} название кнопки поиска {1}")
+    @ParameterizedTest(name = "Для выборнной страны {0} название кнопки поиска {1}")
     void buttonName(String language, String expectedButtonName) {
 
         choiceLanguage.languageTabOpen();
