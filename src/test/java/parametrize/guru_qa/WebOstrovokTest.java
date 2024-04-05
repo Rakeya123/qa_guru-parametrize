@@ -61,16 +61,16 @@ public class WebOstrovokTest {
 
     }
 
-//    @MethodSource
-//    @EnumSource(LanguageOstrovok.class)
-//    @ParameterizedTest
-//    void selenideCorrectFilters(LanguageOstrovok language, List<String> expectedFilters){
-//        Configuration.pageLoadStrategy = "eager";
-//        open("https://ostrovok.ru/");
-//        $(".LanguageWidget-module__control--2X-Kl").click();
-//        $$(".LanguageWidget-module__item--1yC8C").findBy(text(language.name())).click();
-//        $$(".Tabs-module__content--2AOXp").shouldHave(texts(expectedFilters));
-//        $(".homepage-howdy-title").shouldHave(text(language.description));
-//
-//    }
+    @MethodSource
+    @EnumSource(LanguageOstrovok.class)
+    @ParameterizedTest
+    void selenideCorrectFilters(LanguageOstrovok language, List<String> expectedFilters){
+        Configuration.pageLoadStrategy = "eager";
+        open("https://ostrovok.ru/");
+        $(".LanguageWidget-module__control--2X-Kl").click();
+        $$(".LanguageWidget-module__item--1yC8C").findBy(text(language.name())).click();
+        $$(".Tabs-module__content--2AOXp").shouldHave(texts(expectedFilters));
+        $(".homepage-howdy-title").shouldHave(text(language.description));
+
+    }
 }
