@@ -34,9 +34,7 @@ public class WebOstrovokTest {
         choiceLanguage.chooseLanguageClick(language.name());
         choiceLanguage.titleCheckMustHave(language);
 
-
     }
-
 
     @CsvSource(value = {
             "Italiano,Cerca",
@@ -47,9 +45,9 @@ public class WebOstrovokTest {
     void buttonName(String language, String expectedButtonName) {
 
         choiceLanguage.languageTabOpen();
-        $$(".LanguageWidget-module__item--1yC8C").findBy(text(language)).click();
+        choiceLanguage.chooseLanguageClick(language);
+        choiceLanguage.searchButtonLanguage(expectedButtonName);
 
-        $(".Button-module__content--2FF16").shouldHave(text(expectedButtonName));
 
     }
 

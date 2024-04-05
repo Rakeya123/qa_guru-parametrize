@@ -13,7 +13,8 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class ChoiceLanguage {
     private final SelenideElement languageTab = $(".LanguageWidget-module__control--2X-Kl"),
-     titleCheck = $(".homepage-howdy-title");
+     titleCheck = $(".homepage-howdy-title"),
+     searchButton= $(".Button-module__content--2FF16");
 
     private final ElementsCollection chooseLanguage = $$(".LanguageWidget-module__item--1yC8C");
     private final ElementsCollection   titleFilters = $$(".Tabs-module__content--2AOXp");
@@ -41,7 +42,10 @@ public class ChoiceLanguage {
         return this;
     }
 
-
+public ChoiceLanguage searchButtonLanguage(String value){
+        searchButton.shouldHave(text(value));
+        return this;
+}
 
 
 
