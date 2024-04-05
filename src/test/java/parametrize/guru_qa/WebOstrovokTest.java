@@ -63,14 +63,11 @@ public class WebOstrovokTest {
 
     @MethodSource
     @EnumSource(LanguageOstrovok.class)
-    @ParameterizedTest
+    @ParameterizedTest (name = "Названия фильтров на нужном языке")
     void selenideCorrectFilters(LanguageOstrovok language, List<String> expectedFilters){
-        Configuration.pageLoadStrategy = "eager";
-        open("https://ostrovok.ru/");
-        $(".LanguageWidget-module__control--2X-Kl").click();
-        $$(".LanguageWidget-module__item--1yC8C").findBy(text(language.name())).click();
-        $$(".Tabs-module__content--2AOXp").shouldHave(texts(expectedFilters));
-        $(".homepage-howdy-title").shouldHave(text(language.description));
+        choiceLanguage.languageTabOpen();
+        choiceLanguage.chooseLanguageClick(language.name());
+        choiceLanguage.checkingFilters(expectedFilters);
 
     }
 }

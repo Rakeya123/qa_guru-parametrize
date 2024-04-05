@@ -32,8 +32,8 @@ public class ChoiceLanguage {
         return this;
     }
 
-    public ChoiceLanguage checkingFilters(List<String> expectedFilters) {
-        titleFilters.filter(visible).shouldHave(texts(expectedFilters));
+    public ChoiceLanguage checkingFilters(List<String> value) {
+        titleFilters.filter(visible).shouldHave(texts(value));
 
         return this;
     }
