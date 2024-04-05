@@ -1,4 +1,4 @@
-package guru_qa.data;
+package parametrize.data;
 
 public enum LanguageOstrovok {
     Italiano("Abbiamo un sacco di hotel e appartamenti!"),
