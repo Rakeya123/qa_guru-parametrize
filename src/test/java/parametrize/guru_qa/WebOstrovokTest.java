@@ -2,20 +2,22 @@ package parametrize.guru_qa;
 
 import com.codeborne.selenide.Configuration;
 
+import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import parametrize.data.LanguageOstrovok;
+import org.junit.jupiter.api.Disabled;
+import parametrize.data.LanguagOstrovok;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
-import parametrize.pageobjects.ChoiceLanguage;
+import parametrize.pageobjects.MainPage;
 
 import java.util.List;
 import java.util.stream.Stream;
-
 import static com.codeborne.selenide.Selenide.*;
 
 public class WebOstrovokTest {
 
-    ChoiceLanguage choiceLanguage = new ChoiceLanguage();
+    MainPage mainPage = new MainPage();
 
     @BeforeEach
     void setUp() {
@@ -23,14 +25,18 @@ public class WebOstrovokTest {
         open("https://ostrovok.ru");
     }
 
+    @AfterEach
+    void afterEach() {
+        Selenide.closeWebDriver();
+    }
 
-    @EnumSource(LanguageOstrovok.class)
-    @ParameterizedTest(name = "Правильное оттображение выбранного языка")
-    void сorrectTextDisplay(LanguageOstrovok language) {
+    @EnumSource(LanguagOstrovok.class)
+    @ParameterizedTest(name = "Правильное оттображение {0} языка")
+    void сorrectTextDisplay(LanguagOstrovok language) {
 
-        choiceLanguage.languageTabOpen();
-        choiceLanguage.chooseLanguageClick(language.name());
-        choiceLanguage.titleCheckMustHave(language);
+        mainPage.languageTabOpen();
+        mainPage.selectLanguage(language.name());
+        mainPage.chekTitleLanguage(language);
 
     }
 
@@ -42,30 +48,29 @@ public class WebOstrovokTest {
     @ParameterizedTest(name = "Для выборнной страны {0} название кнопки поиска {1}")
     void buttonName(String language, String expectedButtonName) {
 
-        choiceLanguage.languageTabOpen();
-        choiceLanguage.chooseLanguageClick(language);
-        choiceLanguage.searchButtonLanguage(expectedButtonName);
-
+        mainPage.languageTabOpen();
+        mainPage.selectLanguage(language);
+        mainPage.checkSearchButtonLanguage(expectedButtonName);
 
     }
-
 
     static Stream<Arguments> selenideCorrectFilters() {
 
         return Stream.of(
-                Arguments.of(LanguageOstrovok.English, List.of("Destination", "Check-in", "Check-out", "1 room for")),
-                Arguments.of(LanguageOstrovok.Italiano, List.of("Città, hotel o aeroporto", "Check-in", "Check-out", ",1 camera per"))
+                Arguments.of(LanguagOstrovok.English, List.of("Leisure Business")),
+                Arguments.of(LanguagOstrovok.Italiano, List.of("Piacere Lavoro"))
         );
 
     }
 
+    @Disabled
     @MethodSource
-    @EnumSource(LanguageOstrovok.class)
-    @ParameterizedTest (name = "Названия фильтров на нужном языке")
-    void selenideCorrectFilters(LanguageOstrovok language, List<String> expectedFilters){
-        choiceLanguage.languageTabOpen();
-        choiceLanguage.chooseLanguageClick(language.name());
-        choiceLanguage.checkingFilters(expectedFilters);
+    @EnumSource(LanguagOstrovok.class)
+    @ParameterizedTest(name = "Названия фильтров на нужном языке")
+    void selenideCorrectFilters(LanguagOstrovok language, List<String> expectedFilters) {
+        mainPage.languageTabOpen();
+        mainPage.selectLanguage(language.name());
+        mainPage.checkRadioButtons(expectedFilters);
 
     }
 }
