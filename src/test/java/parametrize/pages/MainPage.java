@@ -1,4 +1,4 @@
-package parametrize.pageobjects;
+package parametrize.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;

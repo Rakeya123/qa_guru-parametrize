@@ -5,11 +5,10 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import parametrize.data.LanguagOstrovok;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
-import parametrize.pageobjects.MainPage;
+import parametrize.pages.MainPage;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -63,10 +62,9 @@ public class WebOstrovokTest {
 
     }
 
-    @Disabled
+    //@Disabled
     @MethodSource
-    @EnumSource(LanguagOstrovok.class)
-    @ParameterizedTest(name = "Названия фильтров на нужном языке")
+    @ParameterizedTest(name = "Названия фильтров на {0}  языке")
     void selenideCorrectFilters(LanguagOstrovok language, List<String> expectedFilters) {
         mainPage.languageTabOpen();
         mainPage.selectLanguage(language.name());
